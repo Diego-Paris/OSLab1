@@ -23,18 +23,25 @@ int main (void)
     char *word;
     char **word_list;
 
-    scanf("%d\n", &nlines);
+    scanf("%d", &nlines);
+    //printf("%d", nlines);
     //TODO: INIT word AND word_list
-    
+    word = (char *)malloc(MAX_CHARS * sizeof(char));
+    word_list = (char **)malloc(MAX_LINES * sizeof(char *));
+
     // READ WORDS AND POINT EACH ELEMENT OF WORD_LIST TO A WORD
     for (int i = 0; i < nlines; i++) {
         //TODO: INSERT YOUR CODE TO FILL word_list WITH THE STD INPUTS 
+        scanf("%s", word);
+        word_list[i] = (char *)malloc((strlen(word) + 1) * sizeof(char));
+        strcpy(word_list[i], word);
     }
     
     qsort_((void **) word_list, 0, nlines - 1, (int (*)(void *, void *)) (strcmp));
     
     // PRINT SORTED ELEMENTS: 
     for (int i = 0; i < nlines; i++) {
+        printf("%s\n", word_list[i]);
     }
 
 }
