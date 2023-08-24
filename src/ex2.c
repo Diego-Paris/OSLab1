@@ -4,7 +4,7 @@
 void tribonacci(int n){
 	//initialize array (int* seq) to 1, using malloc/calloc
     int size = 1;
-    int* seq = (int*)calloc(size, sizeof(int));
+    int* seq = calloc(size, sizeof(int));
 
 	for(int i = 0; i <= n; i++){ //FIX iteration parameters
 
@@ -18,7 +18,8 @@ void tribonacci(int n){
         printf("\n");
 
 		//resize array, with realloc
-        seq = realloc(seq, size+1 * sizeof(int));
+        size += 1;
+        seq = realloc(seq, size * sizeof(int));
 	}
 	//free array
     free(seq);
@@ -28,7 +29,13 @@ void tribonacci(int n){
 void tribonacciHelper(int n, int *seq){
     
     for (int i = 0; i <= n; i++) {
-        seq[i] = i + 1;
+        if (i == 0) {
+            seq[i] = 0;
+        } else if (i == 1 || i == 2) {
+            seq[i] = 1;
+        } else {
+            seq[i] = seq[i-1] + seq[i-2] + seq[i-3];
+        }
     }
 
 }
@@ -60,17 +67,6 @@ Reference Expected Value (from tribonacci(20))
 */
 
     printf("Exercise 2 tester.\n");
-    
-    //Test a
-    printf("Test a\n");
-    tribonacci(0);
-    //Test b
-    printf("Test b\n");
-    tribonacci(1);
-    //Test c
-    printf("Test c\n");
-    tribonacci(2);
-
 
     //Test 1
     printf("Test 1\n");
